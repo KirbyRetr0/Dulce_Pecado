@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce o Pecado 🎃</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap');
+
+    :root {
+      --orange: #ff9b3e;
+      --pink: #ff4f89;
+      --purple: #8b2e5c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          ellipse at 50% 0%,
+          #492049 0%,
+          #1c102b 45%,
+          #0b0915 100%
+        );
+      color: white;
+      font-family: 'DM Sans', sans-serif;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+    }
+
+    .wrap {
+      width: min(100%, 540px);
+      text-align: center;
+    }
+
+    .pumpkin {
+      font-size: 55px;
+      filter: drop-shadow(0 0 20px #ff8800);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.2rem, 8vw, 3.7rem);
+      line-height: 1.1;
+      margin: 10px 0;
+      color: #ffb05e;
+      text-shadow: 0 0 24px #d64b57;
+    }
+
+    p {
+      color: #d9c9e2;
+    }
+
+    .panel {
+      border: 1px solid #7d456e;
+      background: #21152cdd;
+      box-shadow: 0 18px 70px #0009;
+      border-radius: 25px;
+      padding: 25px;
+      margin: 24px 0;
+    }
+
+    /* DOS CATEGORÍAS */
+    .modes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .mode {
+      padding: 16px 8px;
+      background: #37213e;
+      color: white;
+      border: 1px solid #744363;
+      border-radius: 13px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: .25s;
+    }
+
+    .mode:hover {
+      transform: translateY(-3px);
+      border-color: #ff9d67;
+    }
+
+    .mode[aria-pressed="true"] {
+      background: #8b2e5c;
+      border-color: #ff9d67;
+      box-shadow: 0 0 15px #ff638044;
+    }
+
+    /* TARJETA DEL RETO */
+    .challenge {
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      padding: 15px 0;
+    }
+
+    .tag {
+      color: #ffb76b;
+      letter-spacing: 2px;
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    #challenge {
+      font-size: clamp(1.25rem, 4vw, 1.7rem);
+      line-height: 1.45;
+      font-weight: 700;
+      animation: appear .4s ease;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* TEMPORIZADOR */
+    .timer {
+      font-size: 2.3rem;
+      font-weight: bold;
+      color: #ffb05e;
+      margin: 12px 0 20px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* BOTONES */
+    button {
+      font: inherit;
+    }
+
+    .primary,
+    .secondary {
+      width: 100%;
+      border-radius: 14px;
+      padding: 17px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 1rem;
+      transition: .2s;
+    }
+
+    .primary {
+      border: 0;
+      background: linear-gradient(
+        110deg,
+        #ff9b3e,
+        #ff4d83
+      );
+      color: #211020;
+      box-shadow: 0 8px 25px #ff5a6544;
+    }
+
+    .primary:hover {
+      transform: scale(1.02);
+    }
+
+    .secondary {
+      margin-top: 10px;
+      background: #382640;
+      color: white;
+      border: 1px solid #744363;
+    }
+
+    .secondary:hover {
+      background: #503054;
+    }
+
+    .counter {
+      font-size: .85rem;
+      color: #c9a6c4;
+      margin-top: 18px;
+    }
+
+    .foot {
+      font-size: .8rem;
+      line-height: 1.6;
+      max-width: 430px;
+      margin: auto;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 380px) {
+      .panel {
+        padding: 17px;
+      }
+
+      .mode {
+        font-size: .9rem;
+        padding: 14px 5px;
+      }
+
+      .primary,
+      .secondary {
+        padding: 15px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="wrap">
+
+    <div class="pumpkin">🎃</div>
+
+    <h1>Dulce o Pecado</h1>
+
+    <p>
+      Una noche. Dos niveles. ¿Te atreves?
+    </p>
+
+    <section class="panel">
+
+      <!-- CATEGORÍAS -->
+      <div class="modes">
+
+        <button
+          class="mode"
+          data-mode="dulce"
+          aria-pressed="true">
+          🍬 Dulce
+        </button>
+
+        <button
+          class="mode"
+          data-mode="pecado"
+          aria-pressed="false">
+          🔥 Pecado
+        </button>
+
+      </div>
+
+      <!-- RETO -->
+      <div class="challenge" aria-live="polite">
+
+        <span class="tag" id="tag">
+          Elige tu destino
+        </span>
+
+        <div id="challenge">
+          Presiona el botón para revelar
+          tu primer reto...
+        </div>
+
+      </div>
+
+      <!-- TEMPORIZADOR -->
+      <div class="timer" id="timer">
+        00:00
+      </div>
+
+      <!-- CONTROLES -->
+      <button class="primary" id="draw">
+        🎲 Revelar reto
+      </button>
+
+      <button class="secondary" id="startTimer">
+        ⏱️ Iniciar temporizador
+      </button>
+
+      <button class="secondary" id="skip">
+        ↪ Pasar / otro reto
+      </button>
+
+      <div class="counter" id="counter">
+        Retos revelados: 0
+      </div>
+
+    </section>
+
+    <p class="foot">
+      🔞 Juego exclusivo para mayores de 18 años.
+      Todos los retos requieren consentimiento.
+      Cualquiera puede pasar sin explicaciones.
+    </p>
+
+  </main>
+
+  <script>
+
+    // ==================================
+    // LISTADO DE RETOS
+    // ==================================
+
+    const challenges = {
+
+      dulce: [
+        "Mira a alguien a los ojos durante 20 segundos sin reírte.",
+        "Dile al oído qué es lo más atractivo de esa persona.",
+        "Dedícale tu mejor frase de conquista a alguien.",
+        "Confiesa quién te parece más misterioso de esta fiesta.",
+        "Invita a alguien a bailar una canción lenta.",
+        "Describe tu cita ideal en tres palabras.",
+        "Dale un cumplido sincero a tres personas.",
+        "Cuenta cuál ha sido tu beso más inolvidable.",
+        "Elige a alguien para una pose romántica.",
+        "Responde una pregunta romántica."
+      ],
+
+      pecado: [
+        "Bésame el cuello durante 1 minuto.",
+        "Dame sexo oral por 30 segundos.",
+        "Tócame donde tú quieras por 30 segundos.",
+        "Báilame sensualmente durante 30 segundos.",
+        "Bésame mientras me masturbas por 30 segundos.",
+        "Simula tus 3 posiciones favoritas.",
+        "Dime al oído qué me harías si estuviéramos en una piscina.",
+        "Bésame desde el cuello hasta mi zona íntima.",
+        "Toca una de mis zonas erógenas por 30 segundos.",
+        "Chupa mi cuello por 30 segundos."
+      ]
+
+    };
+
+    // ==================================
+    // VARIABLES
+    // ==================================
+
+    let mode = "dulce";
+    let last = -1;
+    let count = 0;
+    let seconds = 0;
+    let interval = null;
+    let hasChallenge = false;
+
+    const $ = id => document.getElementById(id);
+
+    // ==================================
+    // CAMBIAR CATEGORÍA
+    // ==================================
+
+    document.querySelectorAll(".mode").forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        mode = button.dataset.mode;
+
+        document.querySelectorAll(".mode").forEach(b => {
+          b.setAttribute(
+            "aria-pressed",
+            String(b === button)
+          );
+        });
+
+        $("tag").textContent =
+          mode === "dulce"
+            ? "🍬 Dulce"
+            : "🔥 Pecado";
+
+        $("challenge").textContent =
+          "¿Listo para descubrir tu destino?";
+
+        last = -1;
+        hasChallenge = false;
+
+        resetTimer();
+
+      });
+
+    });
+
+    // ==================================
+    // REVELAR RETO ALEATORIO
+    // ==================================
+
+    function draw() {
+
+      const arr = challenges[mode];
+
+      let i = Math.floor(Math.random() * arr.length);
+
+      // Evitar repetir el reto anterior
+      if (i === last && arr.length > 1) {
+        i = (i + 1) % arr.length;
+      }
+
+      last = i;
+      hasChallenge = true;
+
+      $("tag").textContent =
+        mode === "dulce"
+          ? "🍬 Dulce"
+          : "🔥 Pecado";
+
+      const challengeElement = $("challenge");
+
+      // Reiniciar animación
+      challengeElement.style.animation = "none";
+      void challengeElement.offsetWidth;
+      challengeElement.style.animation = "appear .4s ease";
+
+      challengeElement.textContent = arr[i];
+
+      count++;
+
+      $("counter").textContent =
+        "Retos revelados: " + count;
+
+      resetTimer();
+
+      // Detectar duración del reto
+      const text = arr[i].toLowerCase();
+
+      const minutes = text.match(/(\d+)\s*minuto/);
+      const secs = text.match(/(\d+)\s*segundo/);
+
+      if (minutes) {
+        seconds = Number(minutes[1]) * 60;
+      } else if (secs) {
+        seconds = Number(secs[1]);
+      } else {
+        seconds = 30;
+      }
+
+      updateTimer();
+
+    }
+
+    // ==================================
+    // TEMPORIZADOR
+    // ==================================
+
+    function updateTimer() {
+
+      const min = Math.floor(seconds / 60);
+      const sec = seconds % 60;
+
+      $("timer").textContent =
+        String(min).padStart(2, "0") + ":" +
+        String(sec).padStart(2, "0");
+
+    }
+
+    function resetTimer() {
+
+      clearInterval(interval);
+      interval = null;
+      seconds = 0;
+
+      updateTimer();
+
+      $("startTimer").textContent =
+        "⏱️ Iniciar temporizador";
+
+    }
+
+    function startTimer() {
+
+      if (!hasChallenge) {
+        $("challenge").textContent =
+          "Primero debes revelar un reto 🎃";
+        return;
+      }
+
+      // Pausar temporizador
+      if (interval) {
+
+        clearInterval(interval);
+        interval = null;
+
+        $("startTimer").textContent =
+          "▶️ Continuar temporizador";
+
+        return;
+      }
+
+      if (seconds <= 0) return;
+
+      $("startTimer").textContent =
+        "⏸️ Pausar temporizador";
+
+      interval = setInterval(() => {
+
+        seconds--;
+
+        updateTimer();
+
+        if (seconds <= 0) {
+
+          clearInterval(interval);
+          interval = null;
+
+          $("startTimer").textContent =
+            "🎃 ¡Tiempo terminado!";
+
+        }
+
+      }, 1000);
+
+    }
+
+    // ==================================
+    // EVENTOS DE LOS BOTONES
+    // ==================================
+
+    $("draw").addEventListener("click", draw);
+
+    $("skip").addEventListener("click", draw);
+
+    $("startTimer").addEventListener(
+      "click",
+      startTimer
+    );
+
+  </script>
+
+</body>
+</html>
